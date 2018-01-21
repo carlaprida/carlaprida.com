@@ -1,13 +1,16 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  align-self: center;
+  justify-self: center;
+  grid-column: content-left / content-right;
+`;
 
 const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
-)
+  <Wrapper>
+    <h2>Hola! Welcome :)</h2>
+  </Wrapper>
+);
 
-export default IndexPage
+export default IndexPage;
