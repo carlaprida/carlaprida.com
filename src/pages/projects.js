@@ -1,18 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import Link from 'gatsby-link';
 import styled from 'styled-components';
 
-const LeftContent = styled.div`
-  grid-area: content-left;
-  overflow-y: scroll;
-  height: auto;
-`;
-
-const RightContent = styled.div`
-  display: grid;
-  grid-area: content-right;
-  padding: 2rem 0;
-`;
+import { LeftContent, RightContent } from '../components/styled';
 
 const ProjectList = styled.ul`
   justify-self: center;
@@ -20,26 +10,70 @@ const ProjectList = styled.ul`
   list-style: none;
   font-size: 2rem;
   line-height: 1.75;
+  text-align: center;
+
+  li:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
 `;
 
-const Projects = () => (
-  <Fragment>
-    <LeftContent>
-      <img src="https://d3n8a8pro7vhmx.cloudfront.net/taxpayers/pages/679/attachments/original/1499663166/4-ways-cheer-up-depressed-cat.jpg?1499663166" alt="Cute cat" />
-      <img src="https://d3n8a8pro7vhmx.cloudfront.net/taxpayers/pages/679/attachments/original/1499663166/4-ways-cheer-up-depressed-cat.jpg?1499663166" alt="Cute cat" />
-      <img src="https://d3n8a8pro7vhmx.cloudfront.net/taxpayers/pages/679/attachments/original/1499663166/4-ways-cheer-up-depressed-cat.jpg?1499663166" alt="Cute cat" />
-    </LeftContent>
-    <RightContent>
-      <ProjectList>
-        <li>Título Proyecto Uno</li>
-        <li>Título Proyecto Dos</li>
-        <li>Título Proyecto Tres</li>
-        <li>Título Proyecto Cuatro</li>
-        <li>Título Proyecto Cinco</li>
-        <li>Título Proyecto Seis</li>
-      </ProjectList>
-    </RightContent>
-  </Fragment>
-);
+class Projects extends Component {
+  constructor() {
+    super();
+    this.state = {
+      project: null,
+    };
+  }
+
+  handleHover(project) {
+    this.setState({
+      project: project.featuredImage.file.url,
+    });
+  }
+
+  render() {
+    const projects = this.props.data.projects.edges;
+    return (
+      <Fragment>
+        <LeftContent>
+          <img src={this.state.project} alt="Cute cat" />
+        </LeftContent>
+        <RightContent>
+          <ProjectList>
+            {projects.map(({ node }) => (
+              <li key={node.id}>
+                <Link onMouseOver={() => this.handleHover(node)} onFocus={() => this.handleHover(node)} to={`/projects/${node.id}`}>{node.title}</Link>
+              </li>
+            ))}
+          </ProjectList>
+        </RightContent>
+      </Fragment>
+    );
+  }
+}
+
+export const pageQuery = graphql`
+  query projectsQuery {
+    projects: allContentfulProject {
+      edges {
+        node {
+          id
+          title
+          featuredImage {
+            file {
+              title
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Projects;
