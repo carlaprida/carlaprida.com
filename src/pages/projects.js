@@ -41,7 +41,7 @@ class Projects extends Component {
     return (
       <Fragment>
         <LeftContent>
-          <img src={this.state.project} alt="Cute cat" />
+          {this.state.project && <img src={this.state.project} alt="Cute cat" />}
         </LeftContent>
         <RightContent>
           <ProjectList>
