@@ -51,6 +51,34 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           });
         });
         resolve();
+      })
+      .then(() => {
+        graphql(`
+            {
+              allContentfulPage(limit: 1000) {
+                edges {
+                  node {
+                    slug
+                  }
+                }
+              }
+            }
+          `).then((result) => {
+          if (result.errors) {
+            reject(result.errors);
+          }
+
+          const pageTemplate = path.resolve('./src/templates/page.js');
+          result.data.allContentfulPage.edges.forEach((edge) => {
+            createPage({
+              path: `${edge.node.slug}`,
+              component: slash(pageTemplate),
+              context: {
+                slug: edge.node.slug,
+              },
+            });
+          });
+        });
       });
   });
 };
