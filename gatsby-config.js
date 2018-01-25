@@ -7,6 +7,8 @@ module.exports = {
     "gatsby-plugin-styled-components",
     "gatsby-plugin-react-next",
     "gatsby-transformer-remark",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     {
       resolve: "gatsby-plugin-typography",
       options: {

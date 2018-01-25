@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   align-content: end;
   justify-items: center;
   padding: 1rem 0;
+  z-index: 1;
 `;
 
 const StyledLink = styled(Link)`

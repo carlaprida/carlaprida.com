@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import Link from "gatsby-link";
+import Img from "gatsby-image";
 import styled from "styled-components";
 
 import { LeftContent, RightContent } from "../components/styled";
@@ -45,8 +46,8 @@ class Projects extends Component {
       <Fragment>
         <LeftContent>
           {selectedProject && (
-            <img
-              src={selectedProject.featuredImage.file.url}
+            <Img
+              resolutions={selectedProject.featuredImage.resolutions}
               alt={selectedProject.featuredImage.title}
             />
           )}
@@ -87,10 +88,15 @@ export const pageQuery = graphql`
           id
           title
           featuredImage {
-            title
-            file {
-              url
+            resolutions(width: 950, height: 844) {
+              base64
+              aspectRatio
+              width
+              height
+              src
+              srcSet
             }
+            title
           }
         }
       }

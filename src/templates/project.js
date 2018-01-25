@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import Link from "gatsby-link";
-import styled from "styled-components";
+import Img from "gatsby-image";
 import * as PropTypes from "prop-types";
 
 import { LeftContent, RightContent } from "../components/styled";
@@ -20,10 +19,14 @@ class ProjectTemplate extends React.Component {
     return (
       <Fragment>
         <LeftContent>
-          <img src={featuredImage.file.url} alt={title} />
+          <Img resolutions={featuredImage.resolutions} alt={title} />
           {images &&
             images.map(image => (
-              <img src={image.file.url} alt={image.file.title} key={image.id} />
+              <Img
+                resolutions={image.resolutions}
+                alt={image.title}
+                key={image.id}
+              />
             ))}
         </LeftContent>
         <RightContent alignSelf="center" pl="4rem" pr="4rem">
@@ -63,14 +66,26 @@ export const pageQuery = graphql`
       }
       date(formatString: "MM/YY")
       featuredImage {
-        file {
-          url
+        title
+        resolutions(width: 950, height: 844) {
+          base64
+          aspectRatio
+          width
+          height
+          src
+          srcSet
         }
       }
       images {
         id
-        file {
-          url
+        title
+        resolutions(width: 950, height: 844) {
+          base64
+          aspectRatio
+          width
+          height
+          src
+          srcSet
         }
       }
     }
