@@ -25,7 +25,7 @@ const Main = styled.main`
 const TemplateWrapper = ({ children }) => (
   <Wrapper>
     <Helmet
-      title="Gatsby Default Starter"
+      title="Carla Prida"
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
