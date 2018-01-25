@@ -5,12 +5,9 @@ import styled from 'styled-components';
 import { LeftContent, RightContent } from '../components/styled';
 
 const ProjectList = styled.ul`
-  justify-self: center;
-  align-self: center;
   list-style: none;
   font-size: 2rem;
   line-height: 1.75;
-  text-align: center;
 
   li:not(:last-child) {
     margin-bottom: 1rem;
@@ -43,7 +40,7 @@ class Projects extends Component {
         <LeftContent>
           {this.state.project && <img src={this.state.project} alt="Cute cat" />}
         </LeftContent>
-        <RightContent>
+        <RightContent alignSelf="center">
           <ProjectList>
             {projects.map(({ node }) => (
               <li key={node.id}>
@@ -65,8 +62,8 @@ export const pageQuery = graphql`
           id
           title
           featuredImage {
+            title
             file {
-              title
               url
             }
           }

@@ -7,17 +7,24 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const LeftContent = styled.div`
+const Content = styled.div`
+  display: grid;
+  align-self: ${props => (props.alignSelf ? props.alignSelf : 'auto')};
+  justify-self: ${props => (props.justifySelf ? props.justifySelf : 'auto')};
+  padding-left: ${props => (props.pl ? props.pl : 'initial')} ;
+  padding-top: ${props => (props.pt ? props.pt : 'initial')} ;
+  padding-right: ${props => (props.pr ? props.pr : 'initial')} ;
+  padding-bottom: ${props => (props.pb ? props.pb : 'initial')} ;
+  text-align: ${props => (props.textAlign ? props.textAlign : 'center')};
+`;
+
+export const LeftContent = Content.extend`
   grid-area: content-left;
   overflow-y: scroll;
 `;
 
-export const RightContent = styled.div`
-  display: grid;
+export const RightContent = Content.extend`
   grid-area: content-right;
-  padding: 2rem 0;
-  text-align: center;
-  align-self: center;
 `;
 
 export const Button = '';
