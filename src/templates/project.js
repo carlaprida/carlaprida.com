@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
 import Link from "gatsby-link";
+import styled from "styled-components";
 import * as PropTypes from "prop-types";
 
 import { LeftContent, RightContent } from "../components/styled";
+import ProjectNavigation from "../components/ProjectNavigation";
 
 class ProjectTemplate extends React.Component {
   constructor() {
@@ -30,8 +32,8 @@ class ProjectTemplate extends React.Component {
               __html: description.childMarkdownRemark.html || ""
             }}
           />
-          <div>{date}</div>
         </RightContent>
+        <ProjectNavigation date={date} />
       </Fragment>
     );
   }
@@ -58,7 +60,7 @@ export const pageQuery = graphql`
           html
         }
       }
-      date
+      date(formatString: "MM/YY")
       featuredImage {
         file {
           url
