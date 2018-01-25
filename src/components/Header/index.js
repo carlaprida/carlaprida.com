@@ -19,7 +19,7 @@ const StyledLink = styled(Link)`
 const Header = () => (
   <HeaderWrapper>
     <h2>
-      <StyledLink to="/">Carla Prida</StyledLink>
+      <StyledLink to="/about">Carla Prida</StyledLink>
     </h2>
   </HeaderWrapper>
 );
