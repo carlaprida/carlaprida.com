@@ -1,4 +1,3 @@
-const _ = require("lodash");
 const Promise = require("bluebird");
 const path = require("path");
 const slash = require("slash");
@@ -30,11 +29,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           reject(result.errors);
         }
 
+        const projects = result.data.allContentfulProject.edges;
+
         // Create Project pages
         const projectTemplate = path.resolve("./src/templates/project.js");
         // We want to create a detailed page for each
         // project node. We'll just use the Contentful id for the slug.
-        _.each(result.data.allContentfulProject.edges, edge => {
+        projects.forEach(({ node }) => {
           // Gatsby uses Redux to manage its internal state.
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -43,10 +44,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             // as a template component. The `context` is
             // optional but is often necessary so the template
             // can query data specific to each page.
-            path: `/projects/${edge.node.id}/`,
+            path: `/projects/${node.id}/`,
             component: slash(projectTemplate),
             context: {
-              id: edge.node.id
+              id: node.id
             }
           });
         });
