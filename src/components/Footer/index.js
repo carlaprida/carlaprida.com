@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import styled from 'styled-components';
+import React from "react";
+import Link from "gatsby-link";
+import styled from "styled-components";
 
 const StyledLink = styled(Link)`
   color: black;
@@ -14,6 +14,10 @@ const FooterWrapper = styled.div`
   height: 70px;
   padding: 1.45rem;
   text-align: center;
+
+  h2 {
+    margin: 0;
+  }
 `;
 
 const Footer = () => (

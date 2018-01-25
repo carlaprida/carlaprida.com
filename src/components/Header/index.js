@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import styled from 'styled-components';
+import React from "react";
+import Link from "gatsby-link";
+import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
   border-bottom: 2px solid black;
@@ -9,6 +9,10 @@ const HeaderWrapper = styled.div`
   height: 70px;
   padding: 1.45rem;
   text-align: center;
+
+  h2 {
+    margin: 0;
+  }
 `;
 
 const StyledLink = styled(Link)`

@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import styled from 'styled-components';
+import React from "react";
+import Link from "gatsby-link";
+import styled from "styled-components";
 
 export const StyledLink = styled(Link)`
   color: black;
@@ -9,13 +9,13 @@ export const StyledLink = styled(Link)`
 
 const Content = styled.div`
   display: grid;
-  align-self: ${props => (props.alignSelf ? props.alignSelf : 'auto')};
-  justify-self: ${props => (props.justifySelf ? props.justifySelf : 'auto')};
-  padding-left: ${props => (props.pl ? props.pl : 'initial')} ;
-  padding-top: ${props => (props.pt ? props.pt : 'initial')} ;
-  padding-right: ${props => (props.pr ? props.pr : 'initial')} ;
-  padding-bottom: ${props => (props.pb ? props.pb : 'initial')} ;
-  text-align: ${props => (props.textAlign ? props.textAlign : 'center')};
+  align-self: ${props => (props.alignSelf ? props.alignSelf : "auto")};
+  justify-self: ${props => (props.justifySelf ? props.justifySelf : "auto")};
+  padding-left: ${props => (props.pl ? props.pl : "initial")};
+  padding-top: ${props => (props.pt ? props.pt : "initial")};
+  padding-right: ${props => (props.pr ? props.pr : "initial")};
+  padding-bottom: ${props => (props.pb ? props.pb : "initial")};
+  text-align: ${props => (props.textAlign ? props.textAlign : "center")};
 `;
 
 export const LeftContent = Content.extend`
@@ -27,4 +27,4 @@ export const RightContent = Content.extend`
   grid-area: content-right;
 `;
 
-export const Button = '';
+export const Button = "";

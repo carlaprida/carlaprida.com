@@ -1,7 +1,7 @@
-const _ = require('lodash');
-const Promise = require('bluebird');
-const path = require('path');
-const slash = require('slash');
+const _ = require("lodash");
+const Promise = require("bluebird");
+const path = require("path");
+const slash = require("slash");
 
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
@@ -15,26 +15,26 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     // it like the site has a built-in database constructed
     // from the fetched data that you can run queries against.
     graphql(`
-        {
-          allContentfulProject(limit: 1000) {
-            edges {
-              node {
-                id
-              }
+      {
+        allContentfulProject(limit: 1000) {
+          edges {
+            node {
+              id
             }
           }
         }
-      `)
-      .then((result) => {
+      }
+    `)
+      .then(result => {
         if (result.errors) {
           reject(result.errors);
         }
 
         // Create Project pages
-        const projectTemplate = path.resolve('./src/templates/project.js');
+        const projectTemplate = path.resolve("./src/templates/project.js");
         // We want to create a detailed page for each
         // project node. We'll just use the Contentful id for the slug.
-        _.each(result.data.allContentfulProject.edges, (edge) => {
+        _.each(result.data.allContentfulProject.edges, edge => {
           // Gatsby uses Redux to manage its internal state.
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -46,36 +46,36 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             path: `/projects/${edge.node.id}/`,
             component: slash(projectTemplate),
             context: {
-              id: edge.node.id,
-            },
+              id: edge.node.id
+            }
           });
         });
         resolve();
       })
       .then(() => {
         graphql(`
-            {
-              allContentfulPage(limit: 1000) {
-                edges {
-                  node {
-                    slug
-                  }
+          {
+            allContentfulPage(limit: 1000) {
+              edges {
+                node {
+                  slug
                 }
               }
             }
-          `).then((result) => {
+          }
+        `).then(result => {
           if (result.errors) {
             reject(result.errors);
           }
 
-          const pageTemplate = path.resolve('./src/templates/page.js');
-          result.data.allContentfulPage.edges.forEach((edge) => {
+          const pageTemplate = path.resolve("./src/templates/page.js");
+          result.data.allContentfulPage.edges.forEach(edge => {
             createPage({
               path: `${edge.node.slug}`,
               component: slash(pageTemplate),
               context: {
-                slug: edge.node.slug,
-              },
+                slug: edge.node.slug
+              }
             });
           });
         });
