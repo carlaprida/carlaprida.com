@@ -15,6 +15,7 @@ class ProjectTemplate extends React.Component {
   render() {
     const { project } = this.props.data;
     const { title, description, date, featuredImage, images } = project;
+    const { next, prev } = this.props.pathContext;
 
     return (
       <Fragment>
@@ -22,7 +23,7 @@ class ProjectTemplate extends React.Component {
           <img src={featuredImage.file.url} alt={title} />
           {images &&
             images.map(image => (
-              <img src={image.file.url} alt={image.file.title} />
+              <img src={image.file.url} alt={image.file.title} key={image.id} />
             ))}
         </LeftContent>
         <RightContent alignSelf="center" pl="4rem" pr="4rem">
@@ -33,7 +34,7 @@ class ProjectTemplate extends React.Component {
             }}
           />
         </RightContent>
-        <ProjectNavigation date={date} />
+        <ProjectNavigation date={date} next={next} prev={prev} />
       </Fragment>
     );
   }
@@ -67,6 +68,7 @@ export const pageQuery = graphql`
         }
       }
       images {
+        id
         file {
           url
         }

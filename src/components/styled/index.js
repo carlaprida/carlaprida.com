@@ -26,5 +26,3 @@ export const LeftContent = Content.extend`
 export const RightContent = Content.extend`
   grid-area: content-right;
 `;
-
-export const Button = "";

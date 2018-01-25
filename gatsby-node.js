@@ -19,6 +19,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           edges {
             node {
               id
+              title
             }
           }
         }
@@ -35,7 +36,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const projectTemplate = path.resolve("./src/templates/project.js");
         // We want to create a detailed page for each
         // project node. We'll just use the Contentful id for the slug.
-        projects.forEach(({ node }) => {
+        projects.forEach(({ node }, index) => {
+          const prev = index === 0 ? false : projects[index - 1].node;
+          const next =
+            index === projects.length - 1 ? false : projects[index + 1].node;
           // Gatsby uses Redux to manage its internal state.
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -47,7 +51,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             path: `/projects/${node.id}/`,
             component: slash(projectTemplate),
             context: {
-              id: node.id
+              id: node.id,
+              prev,
+              next
             }
           });
         });
