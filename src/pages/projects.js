@@ -44,7 +44,7 @@ class Projects extends Component {
     const selectedProject = this.state.project;
     return (
       <Fragment>
-        <LeftContent>
+        <LeftContent fixed>
           {selectedProject && (
             <Img
               resolutions={selectedProject.featuredImage.resolutions}
