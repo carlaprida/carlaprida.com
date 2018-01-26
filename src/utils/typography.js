@@ -14,7 +14,12 @@ const typography = new Typography({
   ],
   bodyFontFamily: ["Amerigo BT", "serif"],
   headerWeight: "normal",
-  includeNormalize: true
+  includeNormalize: true,
+  overrideStyles: () => ({
+    h1: {
+      fontFamily: ["Amerigo BT", "serif"].join(",")
+    }
+  })
 });
 
 export default typography;
