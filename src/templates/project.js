@@ -39,7 +39,19 @@ class ProjectTemplate extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      scrolling: false
+    };
+
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  handleScroll(e) {
+    if (e.target.scrollTop > 150) {
+      this.setState({ scrolling: true });
+    } else {
+      this.setState({ scrolling: false });
+    }
   }
 
   render() {
@@ -49,11 +61,13 @@ class ProjectTemplate extends React.Component {
 
     return (
       <Fragment>
-        <LeftContent>
+        <LeftContent onScroll={e => this.handleScroll(e)}>
           <Img resolutions={featuredImage.resolutions} alt={title} />
-          <Arrow type="image/svg+xml" data={arrow}>
-            Your browser does not support SVGs
-          </Arrow>
+          {!this.state.scrolling && (
+            <Arrow type="image/svg+xml" data={arrow}>
+              Your browser does not support SVGs
+            </Arrow>
+          )}
           {images &&
             images.map(image => (
               <Img
