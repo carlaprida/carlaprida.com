@@ -1,9 +1,39 @@
 import React, { Fragment } from "react";
 import Img from "gatsby-image";
 import * as PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
+import arrow from "../../static/img/arrow.svg";
 
 import { LeftContent, RightContent } from "../components/styled";
 import ProjectNavigation from "../components/ProjectNavigation";
+
+const oscillate = keyframes`
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+`;
+
+const Arrow = styled.object`
+  visibility: hidden;
+  width: 24px;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  animation: ${oscillate} 1s ease-in-out infinite;
+  transition: visibility 0s, opacity 0.5s linear;
+  opacity: 0;
+
+  ${LeftContent}:hover & {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
 
 class ProjectTemplate extends React.Component {
   constructor() {
@@ -11,6 +41,7 @@ class ProjectTemplate extends React.Component {
 
     this.state = {};
   }
+
   render() {
     const { project } = this.props.data;
     const { title, description, date, featuredImage, images } = project;
@@ -20,6 +51,9 @@ class ProjectTemplate extends React.Component {
       <Fragment>
         <LeftContent>
           <Img resolutions={featuredImage.resolutions} alt={title} />
+          <Arrow type="image/svg+xml" data={arrow}>
+            Your browser does not support SVGs
+          </Arrow>
           {images &&
             images.map(image => (
               <Img
